@@ -35,8 +35,6 @@ try:
                 print line
                 subprocess.Popen("iptables -D ARTILLERY %s" % (
                                  line), stderr=subprocess.PIPE, stdout=subprocess.PIPE, shell=True)
-                subprocess.Popen("iptables -D INPUT %s" % (
-                                 line), stderr=subprocess.PIPE, stdout=subprocess.PIPE, shell=True)
 
     # if not valid then flag
     else:
