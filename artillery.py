@@ -1,5 +1,5 @@
 #!/usr/bin/python
-#####################################################################
+#
 #
 #  Artillery v0.7.3
 #
@@ -7,8 +7,11 @@
 #
 # Still a work in progress.
 #
-#####################################################################
-import time,sys,thread,os
+#
+import time
+import sys
+import thread
+import os
 
 # all modules are located within src/, core is reusable code
 
@@ -30,13 +33,13 @@ try:
     # update artillery
     auto_update = check_config("AUTO_UPDATE=")
     if auto_update.lower() == "on":
-            # start auto-updates if on
-            thread.start_new_thread(update, ())
+        # start auto-updates if on
+        thread.start_new_thread(update, ())
 
     # import base monitoring of fs
     monitor_check = check_config("MONITOR=")
     if monitor_check.lower() == "on":
-	    from src.monitor import *
+        from src.monitor import *
 
     # port ranges to spawn
     port = check_config("PORTS=")
@@ -56,13 +59,13 @@ try:
     # check hardening
     import src.harden
 
-    # start the email handler   
+    # start the email handler
     import src.email_handler
 
     # if we are running posix then lets create a new iptables chain
     if operating_system == "posix":
-            time.sleep(2)
-            thread.start_new_thread(create_iptables, ())
+        time.sleep(2)
+        thread.start_new_thread(create_iptables, ())
 
     # start anti_dos
     if operating_system == "posix":
@@ -71,20 +74,20 @@ try:
     # check to see if we are using the intelligence feed
     intelligence_feed = check_config("THREAT_INTELLIGENCE_FEED=").lower()
     if intelligence_feed == "on":
-	    thread.start_new_thread(intelligence_update, ())
+        thread.start_new_thread(intelligence_update, ())
 
     # check to see if we are a threat server or not
     threat_server_check = check_config("THREAT_SERVER=").lower()
     if threat_server_check == "on":
-	    thread.start_new_thread(threat_server, ())
+        thread.start_new_thread(threat_server, ())
 
     # let the program to continue to run
     while 1:
         try:
-                time.sleep(100000)
+            time.sleep(100000)
         except KeyboardInterrupt:
-                print "\n[!] Exiting Artillery... hack the gibson.\n"
-                sys.exit()
+            print "\n[!] Exiting Artillery... hack the gibson.\n"
+            sys.exit()
 
 
 except sys.excepthook:
@@ -93,5 +96,5 @@ except sys.excepthook:
 except KeyboardInterrupt:
     sys.exit()
 
-except Exception:  
+except Exception:
     sys.exit()
