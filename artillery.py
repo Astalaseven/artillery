@@ -82,7 +82,7 @@ try:
         thread.start_new_thread(threat_server, ())
 
     # let the program to continue to run
-    while 1:
+    while True:
         try:
             time.sleep(100000)
         except KeyboardInterrupt:
